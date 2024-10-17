@@ -45,7 +45,7 @@ const OnBoardingItem = ({ item, isLast, navigation }: { item: Slide; isLast: boo
       {isLast && (
         <View style={styles.playbtn}>
           <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-            <PlayButton onPress={() => navigation.replace('SignIn')} />
+            <PlayButton onPress={() => navigation.replace('Auth')} />
           </Animated.View>
         </View>
       )}
