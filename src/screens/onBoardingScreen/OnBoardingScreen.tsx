@@ -1,18 +1,18 @@
-import { StyleSheet, View, FlatList, Animated, Button, ViewToken } from 'react-native';
+import { StyleSheet, View, FlatList, Animated, ViewToken } from 'react-native';
 import React, { useState, useRef } from 'react';
 import slides from '../../data/slides';
 import OnBoardingItem from './OnBoardingItem';
 import Paginator from './Paginator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/navigationTypes';
-import PlayButton from '../../components/PlayButton';
+
 
 type OnboardingScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Onboarding'>;
 };
 
 const OnBoardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [_currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const viewableItemsChanged = useRef(
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'center', // Center the button vertically
-    alignItems: 'center', // Center the button horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

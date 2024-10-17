@@ -1,11 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet} from 'react-native';
+import { TouchableOpacity, StyleSheet, GestureResponderEvent } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import colors from '../constants/color';
 
-const PlayButton = ({ onPress }) => {
+type PlayButtonProps = {
+  onPress: (event: GestureResponderEvent) => void;
+};
+
+const PlayButton: React.FC<PlayButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Icon name="play" size={80} color="#F8F2DA" />
+      <Icon name="play" size={80} color={colors.background} />
     </TouchableOpacity>
   );
 };
@@ -15,7 +20,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#67998A',
+    backgroundColor: colors.playbutton,
     justifyContent: 'center',
     alignItems: 'center',
   },

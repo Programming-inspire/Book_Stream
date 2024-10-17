@@ -16,7 +16,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.replace('Onboarding');
-    }, 8000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [navigation]);

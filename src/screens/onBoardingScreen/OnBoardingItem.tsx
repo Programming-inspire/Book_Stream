@@ -4,10 +4,11 @@ import { Slide } from '../../types/slide';
 import PlayButton from '../../components/PlayButton';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/navigationTypes';
+import colors from '../../constants/color';
 
 const OnBoardingItem = ({ item, isLast, navigation }: { item: Slide; isLast: boolean; navigation: NativeStackNavigationProp<RootStackParamList, 'Onboarding'> }) => {
   const { width } = useWindowDimensions();
-  
+
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export default OnBoardingItem;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F2DA',
+    backgroundColor: colors.background,
     position: 'relative',
   },
   textContainer: {
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
     lineHeight: 45,
     textAlign: 'center',
     marginTop: 50,
+    color: colors.text,
   },
   playbtn: {
     position: 'absolute',

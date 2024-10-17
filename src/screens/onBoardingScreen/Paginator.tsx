@@ -1,7 +1,13 @@
 import { StyleSheet,View, Animated, useWindowDimensions } from 'react-native';
 import React from 'react';
+import { Slide } from '../../types/slide';
+import colors from '../../constants/color';
 
-const Paginator = ({data, scrollX}) => {
+type PaginatorProps = {
+    data: Slide[];
+    scrollX: Animated.Value;
+  };
+  const Paginator: React.FC<PaginatorProps> = ({ data, scrollX }) => {
     const { width } = useWindowDimensions();
     return (
         <View style={styles.container}>
@@ -11,7 +17,7 @@ const Paginator = ({data, scrollX}) => {
                     inputRange,
                     outputRange: [10, 20, 10],
                     extrapolate: 'clamp',
-                })
+                });
                 return <Animated.View style={[styles.dot, {width: dotWidth}]} key={i.toString()}/>;
             })}
         </View>
@@ -24,14 +30,14 @@ const styles = StyleSheet.create({
     container:{
     flexDirection: 'row',
     height: 64,
-    backgroundColor: '#F8F2DA',
+    backgroundColor: colors.background,
     width: '100%',
     justifyContent: 'center',
     },
     dot:{
         height: 10,
         borderRadius: 5,
-        backgroundColor: '#493d8a',
+        backgroundColor: colors.text,
         marginHorizontal: 8,
     },
 });
