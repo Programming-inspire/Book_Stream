@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './src/screens/SplashScreen/SplashScreen';
 import OnBoardingScreen from './src/screens/onBoardingScreen/OnBoardingScreen';
+import SignInScreen from './src/screens/SignInScreen/SignInScreen';
+import { RootStackParamList } from './src/types/navigationTypes';
 
-const Stack = createStackNavigator();
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
@@ -18,6 +21,11 @@ const App = () => {
       <Stack.Screen
         name="Onboarding"
         component={OnBoardingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

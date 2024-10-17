@@ -50,6 +50,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Caudex-Bold.ttf</string>
+		<string>KaushanScript-Regular.ttf</string>
+		<string>Poppins-BoldItalic.ttf</string>
+		<string>Poppins-MediumItalic.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -4,6 +4,18 @@
     {
       "path": "assets/fonts/Caudex-Bold.ttf",
       "sha1": "4ad213b511461fbc0fbb4ac485af40b26e7261ae"
+    },
+    {
+      "path": "assets/fonts/KaushanScript-Regular.ttf",
+      "sha1": "8b203c70f9c8f5d437eb5a87a6c7df39fb2996b7"
+    },
+    {
+      "path": "assets/fonts/Poppins-BoldItalic.ttf",
+      "sha1": "6de8952ca08d27ee77f57347d2cef4b4e26aa78f"
+    },
+    {
+      "path": "assets/fonts/Poppins-MediumItalic.ttf",
+      "sha1": "b592c62fdf88c40cfd0f031bba6423b1d4430472"
     }
   ]
 }

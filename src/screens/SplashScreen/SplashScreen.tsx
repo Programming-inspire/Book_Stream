@@ -3,8 +3,14 @@ import { View, StyleSheet, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Logo from '../../../assets/images/bookStream_logo.png';
 import { useSplashAnimations } from '../../utils/useSplashAnimations';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types/navigationTypes';
 
-const SplashScreen = ({ navigation }) => {
+type SplashScreenProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Splash'>;
+};
+
+const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
   const { springAnim, fadeAnim } = useSplashAnimations();
 
   useEffect(() => {
