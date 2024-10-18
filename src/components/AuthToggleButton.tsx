@@ -8,11 +8,11 @@ type AuthToggleButtonProps = {
 };
 
 const AuthToggleButton: React.FC<AuthToggleButtonProps> = ({ isSignIn, toggle }) => {
-  const translateX = new Animated.Value(isSignIn ? 0 : 110); // Adjust to half the width of the slider
+  const translateX = new Animated.Value(isSignIn ? 0 : 110);
 
-  // Animate on toggle
+
   Animated.timing(translateX, {
-    toValue: isSignIn ? 0 : 110, // Move the slider to the right
+    toValue: isSignIn ? 0 : 110,
     duration: 300,
     useNativeDriver: true,
   }).start();
@@ -22,8 +22,8 @@ const AuthToggleButton: React.FC<AuthToggleButtonProps> = ({ isSignIn, toggle })
       <View style={styles.toggleContainer}>
         <Animated.View style={[styles.slider, { transform: [{ translateX }] }]} />
         <View style={styles.labelsContainer}>
-          <Text style={[styles.label, isSignIn && styles.activeLabel]}>SignIn</Text>
-          <Text style={[styles.label, !isSignIn && styles.activeLabel]}>SignUp</Text>
+          <Text style={[styles.label , isSignIn && styles.activeLabel]}>Sign In</Text>
+          <Text style={[styles.label , !isSignIn && styles.activeLabel]}>Sign Up</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -32,32 +32,40 @@ const AuthToggleButton: React.FC<AuthToggleButtonProps> = ({ isSignIn, toggle })
 
 const styles = StyleSheet.create({
   toggleContainer: {
-    width: 220, // Adjust as needed
-    height: 80, // Increased height
-    borderRadius: 10,
+    width: 220,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: colors.toggleBackground,
     position: 'relative',
     justifyContent: 'center',
+    borderColor: colors.text,
+    borderWidth: 1,
+    overflow: 'hidden',
   },
   slider: {
-    width: 110, // Half of the toggle container width
-    height: 80, // Increased height of the slider
+    width: '50%',
+    height: '100%',
     backgroundColor: '#F8F2DA',
-    borderRadius: 10,
+    borderRadius: 25,
     position: 'absolute',
+    borderWidth: 0.5,
   },
   labelsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     paddingHorizontal: 10,
   },
   label: {
-    fontSize: 20, // Increased font size for better visibility
+    fontSize: 18,
+    flex: 1,
+    textAlign: 'center',
+    lineHeight: 50,
     color: colors.inactiveText,
+   fontFamily: 'KaushanScript-Regular',
   },
   activeLabel: {
-    fontWeight: 'bold',
     color: colors.activeText,
+    fontFamily: 'KaushanScript-Regular',
   },
 });
 
