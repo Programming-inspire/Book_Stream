@@ -31,7 +31,7 @@ const SignIn: React.FC<SignInProps> = ({ navigation }) => {
       const response = await login(email, password);
       await AsyncStorage.setItem('token', response.token);
       Alert.alert('Success', 'Login successful!');
-      navigation.navigate('Home');
+      navigation.navigate('HomeTabs');
     } catch (error: any) {
       Alert.alert('Error', error.message);
     } finally {
@@ -48,7 +48,6 @@ const SignIn: React.FC<SignInProps> = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="email"
-          placeholderTextColor={colors.inactiveText}
           value={email}
           onChangeText={setEmail}
         />
@@ -56,7 +55,6 @@ const SignIn: React.FC<SignInProps> = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="password"
-          placeholderTextColor={colors.inactiveText}
           secureTextEntry
           value={password}
           onChangeText={setPassword}
