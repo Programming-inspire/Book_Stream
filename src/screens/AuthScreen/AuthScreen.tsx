@@ -4,25 +4,34 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import AuthToggleButton from '../../components/AuthToggleButton';
 
-
 const signInBackground = require('../../../assets/images/signin-background.jpeg');
 const signUpBackground = require('../../../assets/images/signup-background.jpeg');
 
-const AuthScreen: React.FC = () => {
+const AuthScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [isSignIn, setIsSignIn] = useState(true);
+
   const handleToggle = () => setIsSignIn(!isSignIn);
   const backgroundImage = isSignIn ? signInBackground : signUpBackground;
+
+
+  const handleSignUpSuccess = () => {
+    setIsSignIn(true);
+  };
 
   return (
     <ImageBackground source={backgroundImage} style={styles.background}>
       <View style={styles.overlay} />
       <View style={styles.contentContainer}>
         <View style={styles.formContainer}>
-          {isSignIn ? <SignIn /> : <SignUp />}
+          {isSignIn ? (
+            <SignIn navigation={navigation} />
+          ) : (
+            <SignUp onSignUpSuccess={handleSignUpSuccess} />
+          )}
         </View>
       </View>
       <View style={styles.togglebuttonContainer}>
-         <AuthToggleButton isSignIn={isSignIn} toggle={handleToggle} />
+        <AuthToggleButton isSignIn={isSignIn} toggle={handleToggle} />
       </View>
     </ImageBackground>
   );
@@ -51,7 +60,7 @@ const styles = StyleSheet.create({
   formContainer: {
     marginBottom: 20,
   },
-  togglebuttonContainer:{
-    bottom:0,
+  togglebuttonContainer: {
+    bottom: 0,
   },
 });

@@ -5,52 +5,68 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
   Dimensions,
 } from 'react-native';
+import { signup } from '../../api/authApi';
 import colors from '../../constants/color';
 
 const { width, height } = Dimensions.get('window');
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC<{ onSignUpSuccess: () => void }> = ({ onSignUpSuccess }) => {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSignUp = async () => {
+    setLoading(true);
+    try {
+      await signup(username, email, password);
+      Alert.alert('Success', 'Sign Up successful! Redirecting to Sign In...');
+      onSignUpSuccess();
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
     <Text style={styles.header}>Discover, Read, and Listen !!</Text>
-    <View style={styles.container}>
-      <Text style={styles.title}>BookStream</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>BookStream</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="username"
-        placeholderTextColor={colors.inactiveText}
+        placeholder="Username"
         value={username}
         onChangeText={setUsername}
       />
 
       <TextInput
         style={styles.input}
-        placeholder="email"
-        placeholderTextColor={colors.inactiveText}
+        placeholder="Email"
         value={email}
         onChangeText={setEmail}
       />
 
       <TextInput
         style={styles.input}
-        placeholder="password"
-        placeholderTextColor={colors.inactiveText}
+        placeholder="Password"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInButtonText}>Sign Up</Text>
+      <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
+        <Text style={styles.signUpButtonText}>
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </Text>
       </TouchableOpacity>
     </View>
+
     </>
   );
 };
@@ -72,7 +88,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: 'KaushanScript-Regular',
     textAlign: 'center',
-    bottom:10,
+    bottom: 10,
   },
   title: {
     fontSize: 25,
@@ -89,7 +105,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: 'KaushanScript-Regular',
   },
-  signInButton: {
+  signUpButton: {
     width: '80%',
     height: 50,
     backgroundColor: colors.background,
@@ -97,11 +113,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
   },
-  signInButtonText: {
+  signUpButtonText: {
     fontSize: 20,
     color: colors.text,
     fontFamily: 'KaushanScript-Regular',
   },
 });
 
-export default SignIn;
+export default SignUp;

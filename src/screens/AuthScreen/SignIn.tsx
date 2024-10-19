@@ -1,3 +1,5 @@
+// src/screens/AuthScreen/SignIn.tsx
+
 import React, { useState } from 'react';
 import {
   View,
@@ -6,42 +8,66 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { login } from '../../api/authApi';
 import colors from '../../constants/color';
 
 const { width, height } = Dimensions.get('window');
 
-const SignIn: React.FC = () => {
-  const [username, setUsername] = useState('');
+interface SignInProps {
+  navigation: any;
+}
+
+const SignIn: React.FC<SignInProps> = ({ navigation }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setLoading(true);
+    try {
+      const response = await login(email, password);
+      await AsyncStorage.setItem('token', response.token);
+      Alert.alert('Success', 'Login successful!');
+      navigation.navigate('Home');
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
-    <Text style={styles.header}>Your Books Are Waiting here!!</Text>
-    <View style={styles.container}>
-      <Text style={styles.title}>BookStream</Text>
+      <Text style={styles.header}>Your Books Are Waiting here!!</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>BookStream</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="username"
-        placeholderTextColor={colors.inactiveText}
-        value={username}
-        onChangeText={setUsername}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="email"
+          placeholderTextColor={colors.inactiveText}
+          value={email}
+          onChangeText={setEmail}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="password"
-        placeholderTextColor={colors.inactiveText}
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="password"
+          placeholderTextColor={colors.inactiveText}
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
 
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInButtonText}>Sign In</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
+          <Text style={styles.signInButtonText}>
+            {loading ? 'Signing In...' : 'Sign In'}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -63,7 +89,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: 'KaushanScript-Regular',
     textAlign: 'center',
-    bottom:10,
+    bottom: 10,
   },
   title: {
     fontSize: 25,
